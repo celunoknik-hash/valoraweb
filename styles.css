@@ -1987,8 +1987,9 @@ section {
   }
 
   .whatsapp-popup {
-    width: 290px;
-    right: -10px;
+  width: min(320px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  right: 0;
   }
 
   .phone-device {
