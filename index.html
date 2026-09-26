@@ -50,17 +50,29 @@
   }
   </script>
 
-  <!-- DATOS ESTRUCTURADOS: EMPRESA -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "ValoraWeb",
-    "url": "https://valoraweb.cl/",
-    "logo": "https://valoraweb.cl/logo.png",
-    "description": "Diseño y desarrollo de páginas web profesionales para empresas, profesionales y emprendedores en Chile."
+  <!-- DATOS ESTRUCTURADOS: EMPRESA / VALORAWEB -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://valoraweb.cl/#organization",
+  "name": "ValoraWeb",
+  "alternateName": [
+    "ValoraWeb Chile",
+    "Valora Web"
+  ],
+  "url": "https://valoraweb.cl/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://valoraweb.cl/logo.png"
+  },
+  "description": "ValoraWeb es una agencia chilena de diseño y desarrollo web especializada en crear páginas web profesionales para empresas, emprendedores y profesionales.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Chile"
   }
-  </script>
+}
+</script>
 
   <!-- DATOS ESTRUCTURADOS: SERVICIO -->
   <script type="application/ld+json">
@@ -70,10 +82,8 @@
     "name": "Diseño y desarrollo de páginas web",
     "description": "Diseño de páginas web profesionales, rápidas y optimizadas para celulares.",
     "provider": {
-      "@type": "Organization",
-      "name": "ValoraWeb",
-      "url": "https://valoraweb.cl/"
-    },
+  "@id": "https://valoraweb.cl/#organization"
+  },
     "areaServed": {
       "@type": "Country",
       "name": "Chile"
