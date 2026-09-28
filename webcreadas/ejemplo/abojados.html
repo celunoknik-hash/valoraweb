@@ -1,1 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Perfil ficticio de ejemplo de Tomás Valdés: derecho civil, de familia y laboral. Consulta de 45 minutos por $35.000 CLP.">
+  <meta name="theme-color" content="#102638">
+  <title>Tomás Valdés | Perfil de demostración</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #102638;
+      --navy-light: #203f58;
+      --gold: #ad8950;
+      --gold-light: #ecd3a5;
+      --white: #ffffff;
+      --ink: #102638;
+      --muted: #596a78;
+      --line: #d9e1e7;
+      --green: #087b48;
+      --green-pulse: #10b981;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: 'Segoe UI', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { 
+      margin: 0; 
+      color: #1a2c3d; 
+      background-color: #0b1a26; 
+      font: 1rem/1.65 var(--sans); 
+      position: relative;
+    }
+    a { color: inherit; text-underline-offset: .25em; }
+    button { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #007bba; outline-offset: 5px; }
+    svg { flex-shrink: 0; }
+    [hidden] { display: none !important; }
 
+    /* CONTENEDOR FIJO DE VIDEO PARA SCRUBBING CON EL SCROLL */
+    .bg-video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -3;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    #scroll-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .bg-video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: radial-gradient(circle at 50% 30%, rgba(7, 22, 34, 0.65) 0%, rgba(5, 14, 22, 0.85) 100%);
+      pointer-events: none;
+    }
+
+    .wrap { width: min(1160px, calc(100% - 4rem)); margin-inline: auto; }
+    .skip { position: absolute; left: 1rem; top: -6rem; z-index: 100; padding: .75rem 1rem; background: var(--white); }
+    .skip:focus { top: 1rem; }
+    
+    .demo-banner { margin: 0; padding: .6rem 1.25rem; background: #07131d; color: #b7c7d4; text-align: center; font-size: .8125rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+    /* Cabecera translúcida fija */
+    .header { 
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12); 
+      background: rgba(10, 25, 38, 0.82); 
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      color: var(--white);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; min-height: 80px; padding-block: .6rem; }
+    .brand { display: flex; align-items: center; gap: .9rem; text-decoration: none; }
+    .brand-mark { color: var(--gold-light); border: 1px solid var(--gold-light); border-radius: 50% 50% 3px 3px; width: 44px; height: 50px; display: grid; place-items: center; font: 1.8rem var(--serif); }
+    .brand-name { display: block; font: 1.4rem/1.3 var(--serif); letter-spacing: -.02em; color: var(--white); }
+    .brand-caption { display: block; color: #a4b9cb; font-size: .85rem; }
+    nav { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1.75rem; }
+    nav a { padding-block: .6rem; font-size: .9375rem; text-decoration: none; color: #d9e5ef; }
+    nav a:hover { color: var(--gold-light); }
+    nav .nav-book { padding: .7rem 1.1rem; border: 1px solid var(--gold-light); border-radius: 3px; background: var(--gold-light); color: var(--navy); font-weight: 600; }
+    nav .nav-book:hover { background: #f6e2bf; color: var(--navy); text-decoration: none; }
+
+    /* HERO OPTIMIZADO (ESPACIO SUPERIOR AJUSTADO) */
+    .hero { position: relative; color: var(--white); padding-block: 2.8rem 3.5rem; }
+    .hero-layout { display: grid; grid-template-columns: 1.35fr 1fr; align-items: center; gap: 4rem; min-height: auto; }
+    .hero .lead { color: #e0e7ed; }
+    .hero .small-note { color: #b7c7d4; }
+    .hero .button { color: var(--navy); background: var(--gold-light); border-color: var(--gold-light); }
+    .hero .button:hover { background: #f6e2bf; border-color: #f6e2bf; }
+    .hero .text-link { color: var(--white); }
+    .hero .text-link:hover { color: var(--gold-light); }
+
+    /* Badge de disponibilidad en tiempo real */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(16, 38, 56, 0.7);
+      border: 1px solid rgba(236, 211, 165, 0.3);
+      padding: .4rem .9rem;
+      border-radius: 30px;
+      font-size: .8125rem;
+      color: var(--gold-light);
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(10px);
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green-pulse);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font: normal clamp(2.6rem, 4.5vw, 4.2rem)/1.1 var(--serif); letter-spacing: -.04em; margin-bottom: 1.25rem; max-width: 14ch; }
+    h1 em { color: var(--gold-light); font-style: normal; }
+    .lead { max-width: 40ch; font-size: 1.0625rem; margin-bottom: 1.8rem; line-height: 1.6; }
+    
+    .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.4rem; }
+    .button { min-height: 50px; padding: .85rem 1.3rem; display: inline-flex; justify-content: center; align-items: center; gap: 1.1rem; background: var(--navy); border: 1px solid var(--navy); color: var(--white); text-decoration: none; border-radius: 3px; font-weight: 600; font-size: .9375rem; transition: background .18s, border-color .18s; cursor: pointer; }
+    .button:hover { background: var(--navy-light); }
+    .text-link { font-size: .9375rem; font-weight: 600; }
+    .small-note { font-size: .875rem; margin: .9rem 0 0; }
+
+    /* Barra de Credenciales / Confianza en Hero */
+    .hero-badges {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .badge-item strong { display: block; font-size: 1.2rem; font-family: var(--serif); color: var(--gold-light); }
+    .badge-item span { font-size: .8rem; color: #b7c7d4; line-height: 1.3; display: block; }
+
+    /* Tarjeta perfil en Hero */
+    .profile-card { 
+      background: rgba(16, 38, 56, 0.78); 
+      color: var(--white); 
+      padding: 2.2rem; 
+      border: 1px solid rgba(255, 255, 255, 0.18); 
+      border-top: 3px solid var(--gold-light); 
+      border-radius: 8px; 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45); 
+      overflow-wrap: anywhere; 
+    }
+    .card-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.14); padding-bottom: 1.2rem; font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; }
+    .card-heading span:last-child { color: var(--gold-light); font: 1.8rem var(--serif); }
+    .profile-name { font: normal clamp(2rem, 3vw, 2.8rem)/1.15 var(--serif); margin: 1.6rem 0 .6rem; letter-spacing: -.025em; }
+    .profile-area { margin-bottom: 1.6rem; color: #c8d5df; font-size: .95rem; }
+
+    /* Puntos clave añadidos a la tarjeta */
+    .card-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.8rem;
+      border-top: 1px dashed rgba(255,255,255,0.15);
+      padding-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .65rem;
+      font-size: .85rem;
+      color: #d8e3ec;
+    }
+    .card-highlights li { display: flex; align-items: center; gap: .6rem; }
+    .card-highlights li::before { content: '✓'; color: var(--gold-light); font-weight: bold; }
+
+    .card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.14); font-size: .875rem; }
+    .card-bottom a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
+    .card-bottom a:hover { text-decoration: underline; }
+
+    .section { padding-block: 5rem; }
+
+    /* PANEL PERFIL PROFESIONAL */
+    .profile-panel {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      padding: 4rem 3.5rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .profile-section { display: grid; grid-template-columns: 1fr 1.25fr; align-items: start; gap: 4rem; }
+    
+    .profile-visual { 
+      position: relative; 
+      margin: 0; 
+      border-radius: 6px; 
+      overflow: hidden; 
+      aspect-ratio: 16 / 11; 
+      background: var(--navy); 
+      border: 1px solid var(--line); 
+      box-shadow: 0 12px 30px rgba(16, 38, 56, 0.18);
+    }
+    .profile-visual .profile-photo { 
+      width: 100%; 
+      height: 100%; 
+      display: block; 
+      object-fit: cover; 
+      object-position: center top; 
+    }
+
+    .profile-body { padding-top: 0; }
+    h2 { font: normal clamp(2rem, 3.2vw, 2.8rem)/1.15 var(--serif); letter-spacing: -.025em; margin-bottom: 1rem; color: var(--navy); }
+    .section-label { color: var(--gold); font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; margin-bottom: .9rem; font-weight: 700; }
+    .profile-description { color: #3b4d5e; font-size: 1.0625rem; line-height: 1.85; margin-bottom: 2rem; white-space: pre-line; }
+    .detail { border-left: 2px solid var(--gold); padding-left: 1.1rem; }
+    .detail dt { font-size: .875rem; color: var(--muted); }
+    .detail dd { margin: .2rem 0 0; font-weight: 600; color: var(--navy); overflow-wrap: anywhere; }
+    .profile-details { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+
+    /* Sección Consulta */
+    .consultation { 
+      background: rgba(16, 38, 56, 0.84); 
+      border-block: 1px solid rgba(255, 255, 255, 0.12); 
+      color: var(--white);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .consultation-inner { display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: 6rem; }
+    .consultation h2 { color: var(--white); }
+    .consultation-copy { color: #c4d3df; max-width: 40ch; margin-bottom: 0; font-size: 1.05rem; }
+    .booking-card { background: var(--white); color: var(--ink); border: 1px solid var(--line); border-top: 4px solid var(--gold); border-radius: 6px; padding: 2.5rem; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); }
+    .booking-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .booking-top h3 { margin: 0; font-size: 1.125rem; font-weight: 600; color: var(--navy); }
+    .duration { background: #eef3f6; color: var(--navy); padding: .3rem .75rem; border-radius: 30px; font-size: .875rem; font-weight: 600; white-space: nowrap; }
+    .price { font: normal clamp(2.2rem, 3.5vw, 3.1rem)/1.2 var(--serif); letter-spacing: -.04em; margin: 1.6rem 0 .65rem; color: var(--navy); overflow-wrap: anywhere; }
+    .price-caption { margin-bottom: 1.6rem; color: var(--muted); font-size: .875rem; }
+    .booking-card .button { width: 100%; background: var(--navy); border-color: var(--navy); color: var(--white); }
+    .booking-card .button:hover { background: var(--navy-light); }
+    .calendar-note { margin: .85rem 0 0; text-align: center; color: var(--muted); font-size: .875rem; }
+
+    /* Sección Contacto */
+    .contact-panel {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      padding: 3.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .contact { display: flex; justify-content: space-between; align-items: center; gap: 3rem; }
+    .contact h2 { font-size: 2.2rem; }
+    .contact p { color: var(--muted); margin-bottom: 0; }
+    .button-outline { background: transparent; color: var(--navy); border-color: var(--navy); font-weight: 700; }
+    .button-outline:hover { background: var(--navy); color: var(--white); }
+    .contact-action { flex-shrink: 0; }
+    .contact-action .small-note { text-align: center; font-size: .875rem; }
+    .contact-email { margin-top: .65rem; overflow-wrap: anywhere; }
+
+    /* Footer */
+    footer { border-top: 1px solid rgba(255, 255, 255, 0.12); padding: 2.5rem 0 5rem; background: rgba(7, 18, 28, 0.96); color: #a9bac7; font-size: .875rem; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+    .footer-inner p { margin: 0; }
+    .footer-inner a, .back-to-top-btn { 
+      color: var(--gold-light); 
+      text-decoration: none; 
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .footer-inner a:hover, .back-to-top-btn:hover { 
+      text-decoration: underline; 
+      color: #f6e2bf;
+    }
+
+    /* Flotantes */
+    .whatsapp-float { position: fixed; bottom: max(1.5rem, env(safe-area-inset-bottom)); right: max(1.5rem, env(safe-area-inset-right)); width: 60px; height: 60px; display: grid; place-items: center; z-index: 25; background: var(--green); color: var(--white); border: 2px solid var(--white); border-radius: 50%; box-shadow: 0 5px 18px rgba(0,0,0,0.3); transition: background .18s, transform .18s; }
+    .whatsapp-float:hover { background: #05643a; transform: scale(1.05); }
+    .whatsapp-icon { width: 29px; height: 29px; fill: currentColor; }
+    .notice { position: fixed; bottom: 6rem; right: 1.5rem; z-index: 26; width: min(340px, calc(100% - 3rem)); padding: 1.2rem; border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: 4px; background: var(--white); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+    .notice p { margin: 0 0 .65rem; color: var(--ink); }
+    .notice button { background: transparent; border: 0; text-decoration: underline; text-underline-offset: .2em; color: var(--navy); min-height: 44px; padding: .4rem .5rem; cursor: pointer; }
+    .svg-library { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    @media (max-width: 900px) {
+      .header-inner { align-items: flex-start; flex-direction: column; gap: .8rem; padding-block: 1.25rem; }
+      nav { width: 100%; justify-content: space-between; gap: .25rem 1rem; }
+      .hero { padding-block: 2.5rem; }
+      .hero-layout { gap: 2.5rem; grid-template-columns: 1fr; }
+      .profile-panel { padding: 2.5rem 1.75rem; }
+      .profile-section, .consultation-inner { gap: 2.5rem; }
+      .hero-badges { grid-template-columns: 1fr; gap: .8rem; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: calc(100% - 2rem); }
+      .hero-layout, .profile-section, .consultation-inner, .profile-details { grid-template-columns: 1fr; }
+      .hero { padding-block: 2rem; }
+      h1 { max-width: 13ch; font-size: 2.3rem; }
+      .section { padding-block: 3.5rem; }
+      .contact-panel { padding: 2rem 1.5rem; }
+      .contact { align-items: flex-start; flex-direction: column; gap: 1.5rem; }
+      .contact-action { width: 100%; }
+      .contact-action .button { width: 100%; }
+      .booking-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Punto ancla superior directo -->
+  <div id="inicio"></div>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <!-- VIDEO DE FONDO VINCULADO AL SCROLL BIDIRECCIONAL -->
+  <div class="bg-video-container" aria-hidden="true">
+    <video id="scroll-video" muted playsinline preload="auto">
+      <source src="banner.mp4" type="video/mp4">
+      <source src="banner.webm" type="video/webm">
+    </video>
+  </div>
+  <div class="bg-video-overlay" aria-hidden="true"></div>
+
+  <p class="demo-banner" id="demo-banner">Sitio de demostración: perfil, servicios, precio y datos de contacto ficticios. El enlace de agenda fue proporcionado por el propietario.</p>
+  
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.9 11.9 0 0 0 12.05 0C5.46 0 .1 5.36.1 11.95c0 2.1.55 4.15 1.6 5.96L0 24l6.25-1.64a11.94 11.94 0 0 0 5.8 1.48h.01C18.64 23.84 24 18.48 24 11.9c0-3.19-1.24-6.18-3.48-8.42ZM12.06 21.82a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.71.97.99-3.62-.23-.37a9.89 9.89 0 0 1-1.52-5.26c0-5.48 4.47-9.94 9.96-9.94a9.87 9.87 0 0 1 7.03 2.91 9.87 9.87 0 0 1 2.9 7.03c0 5.48-4.46 9.87-10.01 9.87Zm5.45-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.48.71.3 1.27.49 1.71.62.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+    </symbol>
+  </svg>
+
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#inicio" aria-label="Perfil jurídico, ir al inicio">
+        <span class="brand-mark" aria-hidden="true">§</span>
+        <span><span class="brand-name" data-field="nombre">Tomás Valdés</span><span class="brand-caption">Abogado · Asesoría jurídica</span></span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#perfil">Perfil</a>
+        <a href="#consulta">Consulta</a>
+        <a href="#contacto">Contacto</a>
+        <a class="nav-book" href="https://calendar.app.google/z736YLs2ndAhztAC7" data-calendar target="_blank" rel="noopener noreferrer" aria-label="Agendar consulta, abre un calendario externo en otra pestaña">Agendar consulta <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <!-- HERO REESTRUCTURADO Y BALANCEADO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-layout">
+        <div>
+          <!-- Badge interactivo de disponibilidad -->
+          <div class="status-badge">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span>Agenda disponible esta semana · Atención online directa</span>
+          </div>
+
+          <h1 id="hero-title">Un espacio para tu <em>consulta legal.</em></h1>
+          <p class="lead">Asesoría jurídica clara, directa y personalizada. Conoce mi método de trabajo y agenda tu sesión de 45 minutos.</p>
+          
+          <div class="actions">
+            <a class="button" href="https://calendar.app.google/z736YLs2ndAhztAC7" data-calendar target="_blank" rel="noopener noreferrer" aria-label="Agendar consulta, abre un calendario externo en otra pestaña">Agendar consulta <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#perfil">Conocer el perfil</a>
+          </div>
+          <p class="small-note">Reserva en línea mediante Google Calendar.</p>
+
+          <!-- Badges de credibilidad añadidos para llenar y valorizar la sección -->
+          <div class="hero-badges">
+            <div class="badge-item">
+              <strong>+10 Años</strong>
+              <span>De práctica y experiencia jurídica</span>
+            </div>
+            <div class="badge-item">
+              <strong>&lt; 24 Horas</strong>
+              <span>Tiempo promedio de respuesta</span>
+            </div>
+            <div class="badge-item">
+              <strong>100% Online</strong>
+              <span>Desde cualquier parte de Chile</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de presentación enriquecida -->
+        <div class="profile-card">
+          <div class="card-heading"><span>Perfil jurídico</span><span aria-hidden="true">§</span></div>
+          <p class="profile-name" data-field="nombre">Tomás Valdés</p>
+          <p class="profile-area" data-field="especialidad">Derecho civil, de familia y laboral</p>
+          
+          <ul class="card-highlights">
+            <li>Atención personalizada directa sin intermediarios</li>
+            <li>Revisión documental previa a la sesión</li>
+            <li>Plan de acción y próximos pasos claros</li>
+          </ul>
+
+          <div class="card-bottom"><span>Consulta · 45 minutos</span><a href="#contacto">Contacto directo <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PERFIL CON FOTO DEL ABOGADO -->
+    <section class="section" id="perfil" aria-labelledby="profile-title">
+      <div class="wrap profile-panel">
+        <div class="profile-section">
+          <div>
+            <p class="section-label">Perfil profesional</p>
+            <h2 id="profile-title">Conoce a tu abogado.</h2>
+            <figure class="profile-visual">
+              <img src="abojado.jpg" alt="Fotografía profesional del abogado Tomás Valdés" class="profile-photo" onerror="this.onerror=null; this.src='abojado.png';">
+            </figure>
+          </div>
+          <div class="profile-body">
+            <p class="profile-description" data-field="presentacion">Soy Tomás Valdés, abogado dedicado a la asesoría de personas y pequeños negocios. Mi enfoque es escuchar tu situación, explicar las alternativas con un lenguaje claro y ayudarte a identificar los próximos pasos.
+
+Atiendo consultas sobre contratos, arriendos, relaciones laborales y asuntos de familia. En la primera sesión revisamos el motivo de tu consulta y los antecedentes que quieras compartir.</p>
+            <div class="profile-details">
+              <dl class="detail"><dt>Área de práctica</dt><dd data-field="especialidad">Derecho civil, de familia y laboral</dd></dl>
+              <dl class="detail"><dt>Modalidad de atención</dt><dd data-field="modalidad">Videollamada · Atención online</dd></dl>
+              <dl class="detail"><dt>Ubicación de referencia</dt><dd data-field="ubicacion">Santiago, Chile</dd></dl>
+              <dl class="detail"><dt>Idioma de atención</dt><dd data-field="idioma">Español</dd></dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section consultation" id="consulta" aria-labelledby="consultation-title">
+      <div class="wrap consultation-inner">
+        <div>
+          <p class="section-label" style="color: var(--gold-light);">Consulta y reservas</p>
+          <h2 id="consultation-title">Dedica un momento<br>a tu consulta.</h2>
+          <p class="consultation-copy">Revisa el valor de la sesión y accede al calendario para gestionar tu reserva.</p>
+        </div>
+        <div class="booking-card">
+          <div class="booking-top"><h3>Consulta jurídica</h3><span class="duration">45 minutos</span></div>
+          <p class="price" data-field="precio">$35.000 CLP</p>
+          <p class="price-caption">Valor de la sesión de 45 minutos · <span data-field="modalidad">Videollamada · Atención online</span></p>
+          <a class="button" href="https://calendar.app.google/z736YLs2ndAhztAC7" data-calendar target="_blank" rel="noopener noreferrer" aria-label="Agendar consulta, abre un calendario externo en otra pestaña">Agendar consulta <span aria-hidden="true">↗</span></a>
+          <p class="calendar-note">El calendario se abre en una nueva pestaña.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto" aria-labelledby="contact-title">
+      <div class="wrap contact-panel">
+        <div class="contact">
+          <div>
+            <p class="section-label">Contacto directo</p>
+            <h2 id="contact-title">Conversemos por WhatsApp.</h2>
+            <p>Escribe para consultar antes de agendar.</p>
+            <p class="contact-email">Correo: <span data-field="correo">contacto@tomasvaldes.example.com</span></p>
+          </div>
+          <div class="contact-action">
+            <a class="button button-outline" href="#contacto" data-whatsapp aria-label="Contactar por WhatsApp">
+              <svg class="whatsapp-icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg> Contactar por WhatsApp
+            </a>
+            <p class="small-note"><span data-field="whatsapp">+56 9 0000 0000</span><br><span id="contact-status">Número ficticio · Demostración</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p><span data-field="nombre">Tomás Valdés</span> · <span data-field="ubicacion">Santiago, Chile</span></p>
+      <button type="button" class="back-to-top-btn" id="btn-top" aria-label="Volver al inicio de la página">Volver al inicio <span aria-hidden="true">↑</span></button>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="#contacto" data-whatsapp aria-label="Contactar por WhatsApp" title="Contactar por WhatsApp">
+    <svg class="whatsapp-icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg>
+  </a>
+
+  <aside class="notice" id="whatsapp-notice" hidden aria-label="Estado de WhatsApp">
+    <p id="whatsapp-message" role="status" aria-live="polite"></p>
+    <button type="button" id="close-notice">Cerrar aviso</button>
+  </aside>
+
+  <script>
+    'use strict';
+
+    /* ------------------------------------------------------------------
+       BOTÓN VOLVER AL INICIO
+       ------------------------------------------------------------------ */
+    const btnTop = document.getElementById('btn-top');
+    if (btnTop) {
+      btnTop.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    /* ------------------------------------------------------------------
+       CONTROL DE VIDEO SINCRONIZADO FLUIDO (CON BLOQUEO DE SEEKING Y LERP)
+       ------------------------------------------------------------------ */
+    const bgVideo = document.getElementById('scroll-video');
+    let targetTime = 0;
+    let videoDuration = 0;
+    let isSeeking = false;
+    let animFrameId = null;
+
+    function initVideoScrubbing() {
+      if (!bgVideo) return;
+
+      bgVideo.muted = true;
+      videoDuration = bgVideo.duration || 0;
+
+      bgVideo.addEventListener('seeked', () => {
+        isSeeking = false;
+      });
+
+      calculateTargetTime();
+
+      if (!animFrameId) {
+        animFrameId = requestAnimationFrame(smoothScrubLoop);
+      }
+    }
+
+    function calculateTargetTime() {
+      if (!videoDuration) {
+        videoDuration = bgVideo.duration || 0;
+        if (!videoDuration) return;
+      }
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const progress = Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+      
+      targetTime = progress * videoDuration;
+    }
+
+    function smoothScrubLoop() {
+      if (videoDuration > 0 && !isNaN(bgVideo.duration)) {
+        if (!isSeeking && !bgVideo.seeking) {
+          const delta = targetTime - bgVideo.currentTime;
+          
+          if (Math.abs(delta) > 0.008) {
+            isSeeking = true;
+            bgVideo.currentTime = bgVideo.currentTime + delta * 0.22;
+          }
+        }
+      }
+      requestAnimationFrame(smoothScrubLoop);
+    }
+
+    if (bgVideo) {
+      bgVideo.preload = 'auto';
+
+      if (bgVideo.readyState >= 2) {
+        initVideoScrubbing();
+      } else {
+        bgVideo.addEventListener('loadedmetadata', initVideoScrubbing, { once: true });
+        bgVideo.addEventListener('loadeddata', initVideoScrubbing, { once: true });
+        setTimeout(initVideoScrubbing, 250);
+      }
+
+      window.addEventListener('scroll', calculateTargetTime, { passive: true });
+      window.addEventListener('resize', calculateTargetTime, { passive: true });
+    }
+
+    /* -------------------------------------------------------------
+       CONFIGURACIÓN DE DATOS DEL PERFIL
+       ------------------------------------------------------------- */
+    const DATOS_PAGINA = {
+      modoDemostracion: true,
+      nombre: 'Tomás Valdés',
+      especialidad: 'Derecho civil, de familia y laboral',
+      presentacion: 'Soy Tomás Valdés, abogado dedicado a la asesoría de personas y pequeños negocios. Mi enfoque es escuchar tu situación, explicar las alternativas con un lenguaje claro y ayudarte a identificar los próximos pasos.\n\nAtiendo consultas sobre contratos, arriendos, relaciones laborales y asuntos de familia. En la primera sesión revisamos el motivo de tu consulta y los antecedentes que quieras compartir.',
+      precio: '$35.000 CLP',
+      modalidad: 'Videollamada · Atención online',
+      ubicacion: 'Santiago, Chile',
+      idioma: 'Español',
+      correo: 'contacto@tomasvaldes.example.com',
+      whatsapp: '+56 9 0000 0000',
+      mensajeWhatsApp: 'Hola, quisiera información sobre una consulta jurídica de 45 minutos.',
+      calendario: 'https://calendar.app.google/z736YLs2ndAhztAC7'
+    };
+
+    function normalizarTelefono(valor) {
+      const texto = String(valor ?? '').trim();
+      if (!/^\+?[\d\s()-]+$/.test(texto)) return '';
+      const numero = texto.replace(/[\s()+-]/g, '');
+      return /^[1-9]\d{7,14}$/.test(numero) ? numero : '';
+    }
+
+    function enlaceWhatsApp(telefono, mensaje) {
+      const numero = normalizarTelefono(telefono);
+      return numero ? 'https://wa.me/' + numero + '?text=' + encodeURIComponent(mensaje) : '';
+    }
+
+    document.querySelectorAll('[data-field]').forEach(elemento => {
+      const valor = DATOS_PAGINA[elemento.dataset.field];
+      if (typeof valor === 'string' && valor.trim()) elemento.textContent = valor.trim();
+    });
+    if (DATOS_PAGINA.nombre.trim()) document.title = DATOS_PAGINA.nombre.trim() + (DATOS_PAGINA.modoDemostracion ? ' | Perfil de demostración' : ' | Consulta y contacto');
+    document.getElementById('demo-banner').hidden = !DATOS_PAGINA.modoDemostracion;
+    document.querySelector('meta[name="description"]').content = DATOS_PAGINA.modoDemostracion
+      ? 'Perfil ficticio de ejemplo de ' + DATOS_PAGINA.nombre + '. Consulta jurídica de 45 minutos.'
+      : DATOS_PAGINA.nombre + '. ' + DATOS_PAGINA.especialidad + '. Consulta jurídica de 45 minutos.';
+
+    document.querySelectorAll('[data-calendar]').forEach(enlace => {
+      enlace.href = DATOS_PAGINA.calendario;
+    });
+
+    const whatsappUrl = DATOS_PAGINA.modoDemostracion ? '' : enlaceWhatsApp(DATOS_PAGINA.whatsapp, DATOS_PAGINA.mensajeWhatsApp);
+    const whatsappEstado = DATOS_PAGINA.modoDemostracion
+      ? 'Número ficticio · Demostración'
+      : 'WhatsApp pendiente de configuración';
+    const aviso = document.getElementById('whatsapp-notice');
+    const mensaje = document.getElementById('whatsapp-message');
+    let activadorAviso = null;
+    document.getElementById('contact-status').textContent = whatsappUrl
+      ? 'Se abre en una nueva pestaña.'
+      : whatsappEstado;
+
+    document.querySelectorAll('[data-whatsapp]').forEach(enlace => {
+      if (whatsappUrl) {
+        enlace.href = whatsappUrl;
+        enlace.target = '_blank';
+        enlace.rel = 'noopener noreferrer';
+        enlace.setAttribute('aria-label', 'Contactar por WhatsApp, abre una nueva pestaña');
+        enlace.title = 'Contactar por WhatsApp';
+      } else {
+        enlace.title = whatsappEstado;
+        enlace.setAttribute('aria-label', 'WhatsApp: ' + whatsappEstado);
+        enlace.addEventListener('click', evento => {
+          evento.preventDefault();
+          activadorAviso = enlace;
+          aviso.hidden = false;
+          mensaje.textContent = DATOS_PAGINA.modoDemostracion
+            ? 'Este teléfono es ficticio. El contacto por WhatsApp se activará al configurar un número real.'
+            : whatsappEstado;
+        });
+      }
+    });
+
+    function cerrarAviso() {
+      if (aviso.hidden) return;
+      aviso.hidden = true;
+      mensaje.textContent = '';
+      if (activadorAviso) activadorAviso.focus();
+    }
+    document.getElementById('close-notice').addEventListener('click', cerrarAviso);
+    document.addEventListener('keydown', evento => {
+      if (evento.key === 'Escape') cerrarAviso();
+    });
+  </script>
+</body>
+</html>
