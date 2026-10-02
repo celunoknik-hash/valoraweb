@@ -3658,3 +3658,163 @@ section {
   }
 
 }
+/* ==========================================================
+   HERO MÁS LIMPIO, COMPACTO Y PROFESIONAL
+   ========================================================== */
+
+.hero-section {
+  padding-top: 92px;
+  padding-bottom: 58px;
+}
+
+/* Recuperar ancho controlado */
+.hero-content {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Badge más discreto */
+.hero-section .badge-pill {
+  padding: 6px 15px;
+  margin-bottom: 24px;
+
+  font-size: 0.78rem;
+
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+/* Título: mucho menos ancho visualmente */
+.hero-title {
+  max-width: 900px;
+
+  font-size: clamp(2.8rem, 4.2vw, 3.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 22px;
+}
+
+/* Descripción más angosta */
+.hero-subtitle {
+  max-width: 650px;
+
+  font-size: 1.08rem;
+  line-height: 1.65;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 32px;
+}
+
+/* Botones menos pesados */
+.hero-cta-group {
+  width: auto;
+  max-width: 100%;
+
+  gap: 12px;
+
+  margin-bottom: 46px;
+}
+
+.hero-cta-group .btn {
+  width: auto;
+  min-height: 48px;
+
+  padding: 13px 24px;
+
+  font-size: 0.93rem;
+}
+
+/* Segundo botón más discreto */
+.hero-cta-group .btn-secondary {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: none;
+}
+
+
+/* ==========================================================
+   TABLET
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+  .hero-content {
+    max-width: 760px;
+  }
+
+  .hero-title {
+    max-width: 720px;
+  }
+
+}
+
+
+/* ==========================================================
+   CELULAR
+   ========================================================== */
+
+@media (max-width: 640px) {
+
+  .hero-section {
+    padding-top: 72px;
+    padding-bottom: 42px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero-section .badge-pill {
+    max-width: 100%;
+
+    padding: 6px 12px;
+
+    font-size: 0.7rem;
+    line-height: 1.4;
+
+    text-align: center;
+  }
+
+  .hero-title {
+    max-width: 100%;
+
+    font-size: clamp(2.1rem, 10vw, 2.75rem);
+    line-height: 1.08;
+
+    margin-bottom: 18px;
+  }
+
+  .hero-subtitle {
+    max-width: 520px;
+
+    font-size: 0.96rem;
+    line-height: 1.6;
+
+    margin-bottom: 26px;
+  }
+
+  .hero-cta-group {
+    width: 100%;
+    gap: 10px;
+
+    margin-bottom: 32px;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+
+    padding: 13px 16px;
+
+    font-size: 0.88rem;
+  }
+
+}
