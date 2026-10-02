@@ -2929,3 +2929,36 @@ svg {
   }
 
 }
+
+/* ==========================================================
+   AJUSTE NAVBAR CON NUEVO SERVICIO DE CORREOS
+   ========================================================== */
+
+.navbar {
+  max-width: 1380px;
+}
+
+.nav-links {
+  gap: 22px;
+}
+
+.nav-links a {
+  white-space: nowrap;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 1200px) {
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+  }
+
+  .navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
