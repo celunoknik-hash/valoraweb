@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Gracias por suscribirte! | ValoraWeb</title>
+  
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="¡Te damos la bienvenida a ValoraWeb! Gracias por suscribirte a nuestra comunidad.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://valoraweb.cl/gracias-por-suscribirte">
+
+  <!-- Fuente Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent: #38bdf8;
+      --success: #10b981;
+      --bg-dark: #090d16;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.1) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Header */
+    header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .header-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .header-link:hover {
+      color: #ffffff;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Success Icon */
+    .icon-wrapper {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-pulse {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(16, 185, 129, 0.2);
+      border-radius: 50%;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 0.2; }
+    }
+
+    .icon-circle {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    .icon-circle svg {
+      width: 40px;
+      height: 40px;
+      color: #ffffff;
+    }
+
+    /* Titles */
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2.2rem;
+    }
+
+    /* Steps list */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+      text-align: left;
+    }
+
+    .step-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 1.25rem 1rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .step-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .step-number {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    .step-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+    }
+
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Actions */
+    .actions-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 380px;
+      padding: 0.95rem 1.75rem;
+      background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-hover) 0%, #172554 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(37, 99, 235, 0.5);
+    }
+
+    .notice-email {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+    }
+
+    .notice-email strong {
+      color: #94a3b8;
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 640px) {
+      .card {
+        padding: 2.2rem 1.5rem;
+      }
+      h1 {
+        font-size: 1.75rem;
+      }
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabecera -->
+  <header>
+    <a href="https://valoraweb.cl" class="logo">
+      Valora<span>Web</span>
+    </a>
+    <a href="https://valoraweb.cl" class="header-link">Ir al Inicio &rarr;</a>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main>
+    <div class="card">
+      
+      <!-- Icono de éxito animado -->
+      <div class="icon-wrapper">
+        <div class="icon-pulse"></div>
+        <div class="icon-circle">
+          <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="badge">Suscripción Exitosa</div>
+
+      <h1>¡Te damos la bienvenida a ValoraWeb!</h1>
+      
+      <p class="subtitle">
+        Muchas gracias por confiar en nosotros. Ya formas parte de nuestra lista exclusiva y recibirás todas las novedades, recursos y oportunidades directas para potenciar tu presencia web.
+      </p>
+
+      <!-- Pasos siguientes informativos -->
+      <div class="steps-grid">
+        <div class="step-item">
+          <span class="step-number">PASO 01</span>
+          <div class="step-title">Revisa tu correo</div>
+          <div class="step-desc">Te hemos enviado un email con la confirmación de tu suscripción.</div>
+        </div>
+        <div class="step-item">
+          <span class="step-number">PASO 02</span>
+          <div class="step-title">Evita el SPAM</div>
+          <div class="step-desc">Añade nuestro correo a tus contactos seguros para no perderte nada.</div>
+        </div>
+        <div class="step-item">
+          <span class="step-number">PASO 03</span>
+          <div class="step-title">Aprovecha los tips</div>
+          <div class="step-desc">Recibirás guías, estrategias y novedades digitales periódicamente.</div>
+        </div>
+      </div>
+
+      <!-- Botón de retorno -->
+      <div class="actions-group">
+        <a href="https://valoraweb.cl" class="btn-primary">
+          <span>Explorar ValoraWeb</span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+          </svg>
+        </a>
+
+        <p class="notice-email">
+          ¿Tienes alguna duda o proyecto en mente? Escríbenos a <strong>contacto@valoraweb.cl</strong>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>&copy; 2026 <a href="https://valoraweb.cl">ValoraWeb.cl</a> — Soluciones Digitales y Desarrollo Web.</p>
+  </footer>
+
+</body>
+</html>
