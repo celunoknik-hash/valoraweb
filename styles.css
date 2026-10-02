@@ -2964,3 +2964,259 @@ svg {
   max-width: 900px;
   margin: 0 auto;
 }
+/* ==========================================================
+   REFINAMIENTO VISUAL GENERAL
+   Página más compacta, integrada y profesional
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   1. RITMO ENTRE SECCIONES
+   ---------------------------------------------------------- */
+
+section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+
+/* Hero conserva un poco más de aire */
+
+.hero-section {
+  padding-top: 105px;
+  padding-bottom: 70px;
+}
+
+
+/* Evitar que Invitaciones quede demasiado pegada */
+
+.wedding-service-section {
+  padding-top: 72px;
+}
+
+
+/* ----------------------------------------------------------
+   2. TÍTULOS DE SECCIÓN MÁS COMPACTOS
+   ---------------------------------------------------------- */
+
+.section-header {
+  max-width: 650px;
+  margin: 0 auto 42px;
+}
+
+.section-title {
+  line-height: 1.18;
+}
+
+.section-description {
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ----------------------------------------------------------
+   3. ANCHO VISUAL CONSISTENTE
+   ---------------------------------------------------------- */
+
+/* Plan principal */
+
+.pricing-card-wrapper {
+  max-width: 920px;
+}
+
+
+/* Correos profesionales */
+
+.business-email-card {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Invitaciones */
+
+.wedding-service-card {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Agenda */
+
+.booking-card {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Demo principal */
+
+.live-demo-showcase {
+  max-width: 1050px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* FAQ */
+
+.faq-accordion {
+  max-width: 780px;
+}
+
+
+/* ----------------------------------------------------------
+   4. TARJETAS MENOS TOSCAS
+   ---------------------------------------------------------- */
+
+.premium-card {
+  padding: 42px;
+}
+
+.business-email-card {
+  padding: 40px;
+  gap: 34px;
+}
+
+.business-email-offer {
+  padding: 30px;
+}
+
+.wedding-service-card {
+  padding: 40px;
+  gap: 36px;
+}
+
+.live-demo-showcase {
+  padding: 40px;
+  gap: 36px;
+}
+
+.booking-card {
+  padding: 38px;
+}
+
+
+/* ----------------------------------------------------------
+   5. BORDES Y SOMBRAS MÁS ELEGANTES
+   ---------------------------------------------------------- */
+
+.premium-card,
+.business-email-card,
+.business-email-offer,
+.wedding-service-card,
+.live-demo-showcase,
+.booking-card {
+  box-shadow:
+    0 18px 45px -22px rgba(0, 0, 0, 0.85),
+    0 0 28px rgba(59, 130, 246, 0.06);
+}
+
+
+/* ----------------------------------------------------------
+   6. SECCIÓN DE CORREOS MÁS LIMPIA
+   ---------------------------------------------------------- */
+
+.business-email-copy h2 {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  line-height: 1.12;
+}
+
+.email-price strong {
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+}
+
+.email-example-list {
+  margin-top: 20px;
+  margin-bottom: 26px;
+}
+
+
+/* ----------------------------------------------------------
+   7. BENEFICIOS MÁS ORDENADOS
+   ---------------------------------------------------------- */
+
+.benefits-grid {
+  max-width: 1050px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 20px;
+}
+
+.benefit-card {
+  padding: 30px 24px;
+}
+
+
+/* ----------------------------------------------------------
+   8. NAVBAR: VOLVER A UN ASPECTO MÁS FINO
+   ---------------------------------------------------------- */
+
+.navbar {
+  max-width: 1100px;
+}
+
+.nav-links {
+  gap: 17px;
+}
+
+.nav-links a {
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+
+/* ----------------------------------------------------------
+   9. TABLET
+   ---------------------------------------------------------- */
+
+@media (max-width: 992px) {
+
+  section {
+    padding-top: 62px;
+    padding-bottom: 62px;
+  }
+
+  .business-email-card,
+  .wedding-service-card,
+  .live-demo-showcase,
+  .booking-card {
+    max-width: 760px;
+  }
+
+}
+
+
+/* ----------------------------------------------------------
+   10. CELULAR
+   ---------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  section {
+    padding-top: 52px;
+    padding-bottom: 52px;
+  }
+
+  .hero-section {
+    padding-top: 80px;
+    padding-bottom: 55px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .premium-card,
+  .business-email-card,
+  .wedding-service-card,
+  .live-demo-showcase,
+  .booking-card {
+    padding: 24px 18px;
+  }
+
+}
