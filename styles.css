@@ -2418,6 +2418,7 @@ section {
   .invitation-process-grid {
     grid-template-columns: 1fr;
   }
+}
 
    /* ==========================================================
    CORRECCIÓN DEFINITIVA DE SCROLL HORIZONTAL EN CELULAR
