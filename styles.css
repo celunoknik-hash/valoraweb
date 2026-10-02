@@ -3295,3 +3295,63 @@ section {
     padding: 22px 18px;
   }
 }
+/* ==========================================================
+   DEMO MÓVIL - TELÉFONO MÁS ANCHO Y PROPORCIONADO
+   ========================================================== */
+
+.live-demo-showcase {
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 42px;
+}
+
+.phone-device {
+  width: 370px;
+  height: 650px;
+  max-width: 100%;
+}
+
+/* Mantener el teléfono centrado */
+.phone-mockup-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Pantallas medianas */
+@media (max-width: 1100px) {
+
+  .phone-device {
+    width: 350px;
+    height: 630px;
+  }
+
+}
+
+
+/* Cuando la sección pasa a una sola columna */
+@media (max-width: 992px) {
+
+  .live-demo-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-device {
+    width: 370px;
+    height: 650px;
+    margin: 0 auto;
+  }
+
+}
+
+
+/* Celular */
+@media (max-width: 480px) {
+
+  .phone-device {
+    width: 100%;
+    max-width: 340px;
+    height: 620px;
+  }
+
+}
