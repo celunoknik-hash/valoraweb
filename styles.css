@@ -2930,36 +2930,29 @@ svg {
   }
 
 }
-
 /* ==========================================================
-   AJUSTE NAVBAR CON NUEVO SERVICIO DE CORREOS
+   AJUSTE NAVBAR PARA NUEVO ENLACE DE CORREOS
    ========================================================== */
 
 .navbar {
-  max-width: 1380px;
+  max-width: 1100px;
 }
 
 .nav-links {
-  gap: 22px;
+  gap: 18px;
 }
 
 .nav-links a {
   white-space: nowrap;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
 }
 
-@media (max-width: 1200px) {
-
+@media (max-width: 1100px) {
   .nav-links {
-    gap: 15px;
+    gap: 12px;
   }
 
   .nav-links a {
-    font-size: 0.82rem;
-  }
-
-  .navbar {
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 0.78rem;
   }
 }
